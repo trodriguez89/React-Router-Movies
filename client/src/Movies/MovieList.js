@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const MovieList = props => {
@@ -16,16 +16,17 @@ const MovieList = props => {
           console.error('Server Error', error);
         });
     }
-    
+
     getMovies();
   }, []);
-  
+
   return (
     <div className="movie-list">
       {movies.map(movie => (
-        
-        <MovieDetails key={movie.id} movie={movie} />
-       
+        <Link to={`/movies/${movie.id}`}>
+          <MovieDetails key={movie.id} movie={movie} />
+        </Link>
+
       ))}
     </div>
   );
@@ -34,7 +35,6 @@ const MovieList = props => {
 function MovieDetails({ movie }) {
   const { title, director, metascore, stars } = movie;
   return (
-    <Link to ={`/movies/${movie.id}`}>
     <div className="movie-card">
       <h2>{title}</h2>
       <div className="movie-director">
@@ -51,7 +51,6 @@ function MovieDetails({ movie }) {
         </div>
       ))}
     </div>
-    </Link>
   );
 }
 
